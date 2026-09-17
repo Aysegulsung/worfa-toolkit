@@ -1,0 +1,10 @@
+# Gizli bilgiler — asla GitHub'a yükleme
+secrets/
+*credentials*.md
+token.json
+.env
+
+# Çalışma çıktıları
+work/
+__pycache__/
+*.pyc
