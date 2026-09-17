@@ -5,8 +5,9 @@ At session start: `git clone https://github.com/Aysegulsung/worfa-toolkit /home/
 dir: every script, the SPEC docs, this README and MANIFEST.md at the root, the rule docs in `rules/`
 (incl. `rules/PROJECT-DESCRIPTION.md`), `docs/` and `history/` for reference only. Nothing is copied doc by doc any more,
 so no copy agent runs and nothing is re-typed. The two credential docs are NOT in the repo (.gitignore): read
-`toolkit/shopify-api-credentials.md` and `dataforseo-credentials.md` from the project with `project_read` and write them
-programmatically to `secrets/shopify.json` (step 1) and `rules/dataforseo-credentials.md` — never print them. When a
+`toolkit/shopify-api-credentials.md` and `dataforseo-credentials.md` from the project with `project_read` and write the
+fetched content programmatically to `./shopify-api-credentials.md` and `./rules/dataforseo-credentials.md` (the paths
+MANIFEST.md lists) — never print them; `secrets/shopify.json` is then built from the first one in step 1. When a
 toolkit or rule file changes, the change is committed to the repo (the project copies under `toolkit/`, `claude/` and the
 root are no longer the source). **Never use Haiku anywhere in this toolkit — every agent (extraction, titles, descriptions,
 verification) runs on Sonnet or above** (user rule 2026-09-04; blr-batch13: Haiku truncated 2 docs and doubled regex
@@ -21,14 +22,15 @@ push with a backup-titles doc missing. Runs before this date wrote all four to t
 Google Drive `Vepine/<tag>/` on 2026-09-08 and deleted from the project (45 of 145 at the time of writing) — the
 Drive folder keeps the old store's name; Worfa runs archive under `Worfa/<tag>/`.
 
-0. Verify the clone before anything reads it (added 2026-09-04, clone route 2026-09-17): `cd /home/claude/work &&
-   sed -n '/^```$/,/^```$/p' MANIFEST.md | grep -v '^```' > MANIFEST.sha256 && sha256sum -c MANIFEST.sha256 --quiet` —
-   the only lines allowed to fail are the two credential docs until they are written from the project; any other FAILED
-   line means the repo and the manifest disagree: stop and report, never patch by hand.
+0. Verify the clone before anything reads it (added 2026-09-04, clone route 2026-09-17): after the two credential docs are
+   on disk, `cd /home/claude/work && sed -n '/^```$/,/^```$/p' MANIFEST.md | grep -v '^```' > MANIFEST.sha256 &&
+   sha256sum -c MANIFEST.sha256 --quiet && echo TOOLKIT OK`. A FAILED script / rule line means the repo and the manifest
+   disagree: stop and report, never patch by hand. A FAILED credential line means the project doc was changed after the
+   manifest was refreshed: re-read it once; if it still fails, recompute that line in MANIFEST.md and commit it.
 1. `secrets/shopify.json` from the project doc toolkit/shopify-api-credentials.md (not in the repo); `python3 shopify_api.py shop` → Worfa. Write
    `brief_flags.json` from the brief: `{"q17_compare_table": true}` when Q17 = "Add table", `false` when "No table" or
    Q17 is not answered (rules/comparison-table-rule.md, 2026-09-06) — compare_build.py, struct-check.py and verify.py read it.
-   Same file, `"q19_fit_block": true|false` from Q19 (rules/fit-block-rule.md, project path claude/fit-block-rule.md; unanswered =
+   Same file, `"q19_fit_block": true|false` from Q19 (rules/fit-block-rule.md; unanswered =
    false) and `"q18_dimension_image": true|false` from Q18 (rules/dimension-image-rule.md; unanswered = false). When true:
    `pip install rembg onnxruntime --break-system-packages` now, so step 7b does not wait for it. Same file, always:
    `"run_mode": "manual" | "scheduled"` from the brief's run-mode question (Q10) — since 2026-09-09 dim_image.py and
@@ -115,7 +117,7 @@ Drive folder keeps the old store's name; Worfa runs archive under `Worfa/<tag>/`
    (`noise cancelling headphones` / `headphones noise cancelling`) in SEPARATE rounds/calls — in one request Google folds
    them and returns the low variant's volume for both (ddl2-batch1 p00: 165,000 read as 2,400). Expect one extra call
    per batch; copy the `… over R round(s) — V word-order variant(s)` stderr line into the run log. Rule:
-   `rules/kw-order-variant-rule.md` (project path `claude/kw-order-variant-rule.md`).
+   `rules/kw-order-variant-rule.md`.
    **Push-blocking:** `title-check.py` (step 5) FAILS the whole batch when any of these
    windows is missing from kw.txt or when products.json is not on disk — so a skipped step 4 cannot reach the store.
 5. Titles in ONE small-context subagent (main model) per TITLE-SPEC.md: cap.py to measure capture, ov.py for the 8.2 shared-word

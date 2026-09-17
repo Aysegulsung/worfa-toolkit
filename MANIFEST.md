@@ -5,25 +5,19 @@ on top of the 2026-09-10 Worfa go-live checks (7 lines: theme colours, store row
 after the same day's store change Vepine → Worfa (17 lines: BRAND, CDN prefix, host, rule docs, credentials),
 on top of the same day's comparison-table mobile/desktop width fix and the rotated Shopify credential pair.
 
-Purpose: the session-start copy (README-toolkit.md step 0) is done by an agent that re-types each project doc into
-/home/claude/work/. In blr-batch13 a Haiku copy agent silently truncated DESC-SPEC.md (lost the "ADD NOTHING" section) and
-title-format-rule.md (lost §10), and doubled regex backslashes in desc-check.py / claims_check.py. This manifest makes that
-detectable at zero model cost.
+Purpose (clone route since 2026-09-17): the toolkit is cloned from https://github.com/Aysegulsung/worfa-toolkit into
+/home/claude/work/, so nothing is re-typed any more. This manifest still proves, at zero model cost, that the clone and the
+two credential docs written from the project are exactly the versions the rules below were tested with. (Before
+2026-09-17 a copy agent re-typed each project doc; in blr-batch13 a Haiku copy agent truncated DESC-SPEC.md and
+title-format-rule.md and doubled regex backslashes — the history notes below refer to that route.)
 
-## Use (after the copy agent finishes)
-1. Save the block below to /home/claude/work/MANIFEST.sha256 (57 lines; Write it exactly).
-2. `sha256sum -c MANIFEST.sha256 --quiet && echo TOOLKIT OK`
-3. Any file it lists as FAILED was altered in the copy: project_read that doc again and re-write it — never patch by hand.
-   A 1-byte difference is usually a trailing newline; re-copy anyway until it passes.
-4. build_check.py is edited by the title step (FR/EXTRA per batch) — its checksum is for the pristine project version only.
-5. The copy agent must write the fetched `content` to disk programmatically (`open(p,'w').write(content)`), never re-type it.
-   Retyping is what produced every corruption this manifest has caught: dropped semicolons, added spaces after commas,
-   reflowed line breaks, doubled backslashes.
-6. A FAILED line is not proof of corruption — it can also mean the project doc changed after the manifest was refreshed.
-   Tell the two apart before acting: make a SECOND independent copy of that doc and compare the two copies' sha256.
-   Two independent copies that agree = the manifest line is stale (recompute it here). They disagree = one copy is
-   corrupted; keep the clean one. In blr-batch19 this separated 3 stale lines from 1 genuinely corrupted copy
-   (description-format-rule.md had come back JSON-escaped: `\"` for every quote and one literal `\n`).
+## Use (README-toolkit.md step 0)
+1. Write the two credential docs from the project to `./shopify-api-credentials.md` and `./rules/dataforseo-credentials.md`.
+2. `sed -n '/^```$/,/^```$/p' MANIFEST.md | grep -v '^```' > MANIFEST.sha256 && sha256sum -c MANIFEST.sha256 --quiet && echo TOOLKIT OK`
+3. A FAILED script / rule line: the repo and this manifest disagree — stop and report, never patch by hand.
+4. A FAILED credential line: the project doc changed after the last refresh — re-read it once; still failing = recompute
+   that line here and commit it.
+5. build_check.py is edited by the title step (FR/EXTRA per batch) — its checksum is for the pristine repo version only.
 
 ## Keep in sync
 Whenever a toolkit or rule doc changes in the project, recompute its line (`sha256sum <file>`) and replace it here in the same
@@ -1090,12 +1084,14 @@ Not run on a live batch yet; the 8 hand-fixed places on the pushed batch already
 **Refresh note (2026-09-17, GitHub clone route):** `./README-toolkit.md` recomputed (both lines) after a PROCESS CHANGE (user
 decision): the toolkit now lives in https://github.com/Aysegulsung/worfa-toolkit, whose root is the work dir, and a session
 starts with `git clone` instead of a copy agent re-typing project docs. Only the README header and step 0 changed. The two
-credential docs stay in the project and are written to disk at session start; their two manifest lines fail until then.
+credential docs stay in the project and are written to disk at session start. Same day, second pass: the header "Purpose / Use"
+sections rewritten for the clone route, README step 0 now writes both credential docs to the manifest paths before the check (so all
+57 lines must pass), and the stale "project path claude/…" notes removed from README.
 
 ```
 23729e84855de0c9cd3c50574a5629426537b1335ec258c94cb7b75614515a1c  ./DESC-SPEC.md
 06007e07544be11e3be8b5194c17546c240543f24630b0da687d761c9447aeaa  ./EXTRACT-SPEC.md
-e1b0cfdc332f6e888dba63ff46d481ac09793f92961e77ff50478b9502d1a8aa  ./README-toolkit.md
+171f81e9c2a6a3a79b91dec7a7ca438a8d8b7a1db765204be92ecf63b4aba88c  ./README-toolkit.md
 9fefaf0e8e6df0c5152d95672fa161857eefed6bdd55c1e977a978a76f304fdb  ./TITLE-SPEC.md
 6f95706cd6d1b1c278c3712427e4e31f2b51bbe7bbf4d6576d38874a6e6351bb  ./build_check.py
 18af4fa1108f5c83e8773ec4d1a27cf8fc2bdfa77ce14e11f979e44055cf15e7  ./cap.py
@@ -1147,7 +1143,7 @@ ca3d7b1753cfc850588e7f746886fb6bc161bf6c65f488553b017dc3d6be70b3  ./kf_review_in
 02b0d2e9de323b1167d42c637d13ff244a3e0833667087cbee2dbb3b1a0d80d9  ./usage_tips.py
 9537576f5d9b334a0f8c36afa5691f2aae93a343bc5dc005c33960c1422df545  ./sections.py
 3338fb4510aa32b831bddfd602f5acb3f1e469d341d55a6757f5ad20605a5399  ./kw_measure.py
-e1b0cfdc332f6e888dba63ff46d481ac09793f92961e77ff50478b9502d1a8aa  ./README-toolkit.md
+171f81e9c2a6a3a79b91dec7a7ca438a8d8b7a1db765204be92ecf63b4aba88c  ./README-toolkit.md
 ecf9731e745ef965f65733a7c7cf530046dc25bea32681c40c6bc05a87e67ea2  ./rules/kw-order-variant-rule.md
 7c86386a6f77ab101bd60957e78df39449751dce01cf61c7f0eb6da2ffad4d74  ./list_bold.py
 ```
