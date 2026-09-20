@@ -53,7 +53,7 @@ KNOWN = re.compile(r"^\s*(?:"
                    r"how to use|instructions?(?: for use)?|directions?(?: for use)?|operation|user guide|"
                    r"usage tips?|usage recommendations?|usage suggestions?|tips?(?: for use| & tricks)?|pro tips?|recommended uses?|"
                    r"(?:product )?descriptions?|overview|about(?: this item| this product| the product)?|introduction|summary"
-                   r")\s*:?\s*$", re.I)
+                   r")\s*[:?]?\s*$", re.I)
 
 # ---- canonical headings (normalised vocabulary, user decision 2026-09-08) — floor, not ceiling ------------------------------
 CANON = [
@@ -118,7 +118,8 @@ def source_sections(raw_html, vals):
     out, dismissed = [], []
     for i, (s, e, text) in enumerate(heads):
         nxt = heads[i + 1][0] if i + 1 < len(heads) else len(h)
-        if KNOWN.match(text) or HOWTO_OR_TIPS.match(text): continue
+        ntext = text.replace("\u2019", "'").replace("\u2018", "'")   # curly apostrophe (2026-09-19, ddl2-batch12)
+        if KNOWN.match(ntext) or HOWTO_OR_TIPS.match(ntext): continue
         block = h[e:nxt]
         if POLICY.search(text):   # a seller-policy block is never copy (user rule 2026-09-07) — logged, never a section
             lines = [clean(x) for x in re.findall(r"<li[^>]*>(.*?)</li>|<p[^>]*>(.*?)</p>", block, re.S | re.I) for x in [x[0] or x[1]] if clean(x)]
