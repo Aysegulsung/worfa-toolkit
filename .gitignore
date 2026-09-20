@@ -36,3 +36,10 @@ MANIFEST.sha256
 work/
 __pycache__/
 *.pyc
+
+# Batch raporları — projeye yazılır, repoya değil
+backup-titles-*.md
+run-log-*.md
+category_map.json
+fact_cover_*.txt
+title-report.json
