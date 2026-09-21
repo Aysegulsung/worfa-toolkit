@@ -1088,10 +1088,25 @@ credential docs stay in the project and are written to disk at session start. Sa
 sections rewritten for the clone route, README step 0 now writes both credential docs to the manifest paths before the check (so all
 57 lines must pass), and the stale "project path claude/…" notes removed from README.
 
+**Refresh note (2026-09-21 — health-claim rule rewritten, RULE CHANGE at the user's decision):** seven lines recomputed
+after a deliberate RULE CHANGE, not a copy problem. New rule (Backend doc Safety Notes, project description rewritten the same
+day): a health benefit the source itself states is KEPT, never softened or removed — relieves back and hip pain, reduces acid
+reflux, improves breathing, deep restful sleep, "instantly", "all night" and the like; a benefit the source does not state is
+never invented; forbidden in every case: disease-treatment claims (heals / treats / cures / prevents a named disease or
+condition) and "clinically proven" / "doctor recommended" / "FDA approved" unless the source states it; the source's own
+disclaimer sentence stays. Files changed (one sentence each, the old "comfort language, never a medical claim" /
+"soften/remove" wording replaced): `./rules/PROJECT-DESCRIPTION.md` (Safety Notes paragraph), `./rules/description-format-rule.md`
+(§ scene sentence + safety line), `./fact_cover.py` (docstring only, code unchanged, py_compile OK), `./README-toolkit.md`
+(step 6 sentence; both lines below), `./rules/comparison-table-rule.md` (rule 7), `./rules/cta-benefits-metafield.md` (Safety
+Notes line), `./DESC-SPEC.md` (insoles/denture line). Not touched: `./rules/fit-block-rule.md` (proof half = fact, structural)
+and `./CTA-REVIEW-SPEC.md` item 5 (an outcome the source does not state — consistent with the new rule). No step, script or
+gate was added. The changed files, this manifest and MANIFEST.sha256 were sent to the user as one zip for the GitHub upload;
+the project copies were updated with project_write in the same turn.
+
 ```
-23729e84855de0c9cd3c50574a5629426537b1335ec258c94cb7b75614515a1c  ./DESC-SPEC.md
+2b2e61f0161a9ec67baba8955829f626548cddeec3aac527ad6f9bc8e5490e94  ./DESC-SPEC.md
 06007e07544be11e3be8b5194c17546c240543f24630b0da687d761c9447aeaa  ./EXTRACT-SPEC.md
-171f81e9c2a6a3a79b91dec7a7ca438a8d8b7a1db765204be92ecf63b4aba88c  ./README-toolkit.md
+2e077a87289964ff1986d5810df086ab5f237a302678d61400c36f727ae0e5d3  ./README-toolkit.md
 9fefaf0e8e6df0c5152d95672fa161857eefed6bdd55c1e977a978a76f304fdb  ./TITLE-SPEC.md
 6f95706cd6d1b1c278c3712427e4e31f2b51bbe7bbf4d6576d38874a6e6351bb  ./build_check.py
 18af4fa1108f5c83e8773ec4d1a27cf8fc2bdfa77ce14e11f979e44055cf15e7  ./cap.py
@@ -1101,17 +1116,17 @@ f68add61a780c188c1811b927cd6e3bc03973a629034276ab089b70c5ffacad4  ./age_check.py
 b0757ad4fb2b1dd0ca20d03c64aeff9dc878467fe2397235c1f385fef76794bc  ./cta_check.py
 96a8718c232e6e2b645c142c0392ea7ee0867269a43ffefb2e3f0744be3c34be  ./desc-check.py
 6c412247868cfae60cc3f783e8ea6e7df36d737aaa5964a085897fea977d224d  ./extract_html.py
-739e014db455d5fa6c684bc5bc4ebe3c68ccf54bf441b41ba3942175c9a7a38d  ./fact_cover.py
+f869bd34e0e4fc64dcb9a92945814d41fd26eb59fbfebb31df51ceb258ab9f4b  ./fact_cover.py
 cde1242bc9ef0068eab3e0dc6eb3448da487a390c8ef85c75000c438408f3746  ./factcheck_prompt.md
 ec9b191a54332576c86f90188f6070110b362e0f39a85da27947ef5193c4ff93  ./gate.py
 b172ebe12906d7f84182c11605cec312000d2847718cf93c40cc58a7e622fdba  ./head_check.py
 2e2e2eb2493ba4ab84ab958e7681d5b278a00ca35da3a6abe594a15d41d076ff  ./novel_words.py
 e707095eb797499bba92ca2c7dfe4874f772ea6217bf9cb82b1c2af10cf5a23b  ./ov.py
-f5c61311db94794799853419786fd5bf5745a2e450b0a5e38fb6c818f22ad3bb  ./rules/cta-benefits-metafield.md
+a50108d622e9e91eb5b8e78790968e511b2efd3e786b477f5f39a8ad7bd6da37  ./rules/cta-benefits-metafield.md
 1da499cd8e7023e4e8e9682a3182206a2fd360ad64bb5203d9054d9f3b5c4c09  ./rules/dataforseo-credentials.md
-5d15d5426dc5676d3dd8ed4f6b89435f67dde59f6f881f6cc3ea900df8b58439  ./rules/description-format-rule.md
+f968f485f4206268ac2da3605588f981b00c1fc3fe34eba3d8d5296c88cb8174  ./rules/description-format-rule.md
 1009ea65ea1015faa372ae468977c555b4c986c18e1573c291e295de177bfc4f  ./rules/image-alt-text-rule.md
-89e1ce959490cd02fc753583ff46f997882cd48dfa7caaf1ee2de8d47c4deb30  ./rules/PROJECT-DESCRIPTION.md
+77ea823f6befff40870ea417021c5ffd602525ed841c891688799bc6a31268bb  ./rules/PROJECT-DESCRIPTION.md
 20f2560a880ecc6a627411a27ab77df075ea6f444ae6890fa1e6b76f459e08e2  ./rules/rule-overlap-deferred.md
 8c9ff354b4da2f61807966834d0659d1873367d197c8b0ab2a256edcf737e187  ./rules/title-format-rule.md
 57c8dfd0dc944c0f2295e8ef7f10f856fd2fe11ad6c87a2f0e341ed3a5491c71  ./source_windows.py
@@ -1125,7 +1140,7 @@ cc960c21f1db9b523a9bd18c3654ea56eedfa973b6bc7779e88e4fcf79ac8def  ./usage-effici
 5d69761a78a4baa7c66fd6f66b4a98d2be9d5b8a119bfc5fabc301443bb77b52  ./verify.py
 255236bbbcdf3c31fbf01aac2838c3fcfac2d0d5c280f0b6c2069f1810f233d7  ./rehost.py
 dd4678b691af86e47380b18ccfe6f97bac6178f371b61633e9b2061b2f849b25  ./compare_build.py
-9aeb1438dd709ffccebb2bcb2a7f8e654396f45d1d34ca02ccbb867149d3ae19  ./rules/comparison-table-rule.md
+0fbd03f9d26124b66dfd289cfe8ae9024bdaf5422a83c859aaecf27e7820bf2f  ./rules/comparison-table-rule.md
 9b357c78e037424efe1a37d266a2a477249ca93aa81e473f8d2a9a19c52a47da  ./dim_image.py
 18ff02a467edfa90758d943af8851d5878bc4609c7550cb6687a222f44b8bace  ./dim_attach.py
 2e8bd0864f237bfba8ea0fb0c0b804cfe30fc2a24623c9daca3de7b03e512da0  ./dim_keep.py
@@ -1143,7 +1158,7 @@ ca3d7b1753cfc850588e7f746886fb6bc161bf6c65f488553b017dc3d6be70b3  ./kf_review_in
 02b0d2e9de323b1167d42c637d13ff244a3e0833667087cbee2dbb3b1a0d80d9  ./usage_tips.py
 39a98da89746f08bc685f4858c7e8edd1bfbc36d31b373f8fdef5c71436d6996  ./sections.py
 3338fb4510aa32b831bddfd602f5acb3f1e469d341d55a6757f5ad20605a5399  ./kw_measure.py
-171f81e9c2a6a3a79b91dec7a7ca438a8d8b7a1db765204be92ecf63b4aba88c  ./README-toolkit.md
+2e077a87289964ff1986d5810df086ab5f237a302678d61400c36f727ae0e5d3  ./README-toolkit.md
 ecf9731e745ef965f65733a7c7cf530046dc25bea32681c40c6bc05a87e67ea2  ./rules/kw-order-variant-rule.md
 7c86386a6f77ab101bd60957e78df39449751dce01cf61c7f0eb6da2ffad4d74  ./list_bold.py
 ```
