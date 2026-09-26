@@ -1128,11 +1128,13 @@ sections rewritten for the clone route, README step 0 now writes both credential
 57 lines must pass), and the stale "project path claude/…" notes removed from README.
 **Refresh note (2026-09-26 — description image layout):** `./spread.py` and `./rules/description-image-layout-rule.md` added at the user's decision (rule: no two images back to back in a description; extras go to section breaks, leftovers into one `div.fewpe-img-grid`; image count/order/src/attributes unchanged). `spread.py` is the user's version plus one patch — `blocks()` splits a `<p>`/`<div>` holding several images into one block per image so `<p><img><img></p>` is detected and verified — and a `--handle` option for a one-product manual test. First store-wide sweep the same day: 3,171 active, 9 changed, 0 grids, verify mismatch 0 / adjacent 0 / style missing 0. README step 7 (`spread.py final`) and verify.py check 18 are NOT wired yet — deferred by the user.
 
+**Refresh note (2026-09-26, second pass — wiring):** `./README-toolkit.md` step 7 now runs `python3 spread.py final` after dim_keep and before the payloads (and step 8 lists the new check); `./verify.py` gained check 18 `image layout` (spread.adjacent() == 0 outside the grid, grid <style> present; 18 checks per product). The 'not wired yet' note in the project description is obsolete from this refresh.
+
 
 ```
 2b2e61f0161a9ec67baba8955829f626548cddeec3aac527ad6f9bc8e5490e94  ./DESC-SPEC.md
 06007e07544be11e3be8b5194c17546c240543f24630b0da687d761c9447aeaa  ./EXTRACT-SPEC.md
-2e077a87289964ff1986d5810df086ab5f237a302678d61400c36f727ae0e5d3  ./README-toolkit.md
+194129a964903d342f3d0a89ab8843053e1d2b5bc96578f429758764f289a71d  ./README-toolkit.md
 9fefaf0e8e6df0c5152d95672fa161857eefed6bdd55c1e977a978a76f304fdb  ./TITLE-SPEC.md
 6f95706cd6d1b1c278c3712427e4e31f2b51bbe7bbf4d6576d38874a6e6351bb  ./build_check.py
 18af4fa1108f5c83e8773ec4d1a27cf8fc2bdfa77ce14e11f979e44055cf15e7  ./cap.py
@@ -1163,7 +1165,7 @@ f968f485f4206268ac2da3605588f981b00c1fc3fe34eba3d8d5296c88cb8174  ./rules/descri
 26ad735d271e55c2cba847c356123f5f38e1cf072171e2ba07be4589c9324bad  ./title-check.py
 cc960c21f1db9b523a9bd18c3654ea56eedfa973b6bc7779e88e4fcf79ac8def  ./usage-efficiency-runbook.md
 420431d7b50507a524c1140eb0bcdd7ad6e04c6290246d99a0b5dd767db12205  ./value_check.py
-5d69761a78a4baa7c66fd6f66b4a98d2be9d5b8a119bfc5fabc301443bb77b52  ./verify.py
+0e87763253b88cb83c45610ed6b581529e08990f54bc8a5806be9e394def3df9  ./verify.py
 255236bbbcdf3c31fbf01aac2838c3fcfac2d0d5c280f0b6c2069f1810f233d7  ./rehost.py
 dd4678b691af86e47380b18ccfe6f97bac6178f371b61633e9b2061b2f849b25  ./compare_build.py
 0fbd03f9d26124b66dfd289cfe8ae9024bdaf5422a83c859aaecf27e7820bf2f  ./rules/comparison-table-rule.md
@@ -1184,7 +1186,7 @@ ca3d7b1753cfc850588e7f746886fb6bc161bf6c65f488553b017dc3d6be70b3  ./kf_review_in
 02b0d2e9de323b1167d42c637d13ff244a3e0833667087cbee2dbb3b1a0d80d9  ./usage_tips.py
 39a98da89746f08bc685f4858c7e8edd1bfbc36d31b373f8fdef5c71436d6996  ./sections.py
 3338fb4510aa32b831bddfd602f5acb3f1e469d341d55a6757f5ad20605a5399  ./kw_measure.py
-2e077a87289964ff1986d5810df086ab5f237a302678d61400c36f727ae0e5d3  ./README-toolkit.md
+194129a964903d342f3d0a89ab8843053e1d2b5bc96578f429758764f289a71d  ./README-toolkit.md
 ecf9731e745ef965f65733a7c7cf530046dc25bea32681c40c6bc05a87e67ea2  ./rules/kw-order-variant-rule.md
 7c86386a6f77ab101bd60957e78df39449751dce01cf61c7f0eb6da2ffad4d74  ./list_bold.py
 b3b64dd58e7faff215653dd17d1d7cd74d1ccd9e4ae76c2580c273a5273fbb51  ./fix_sections.py
