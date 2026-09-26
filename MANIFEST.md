@@ -1126,6 +1126,8 @@ starts with `git clone` instead of a copy agent re-typing project docs. Only the
 credential docs stay in the project and are written to disk at session start. Same day, second pass: the header "Purpose / Use"
 sections rewritten for the clone route, README step 0 now writes both credential docs to the manifest paths before the check (so all
 57 lines must pass), and the stale "project path claude/…" notes removed from README.
+**Refresh note (2026-09-26 — description image layout):** `./spread.py` and `./rules/description-image-layout-rule.md` added at the user's decision (rule: no two images back to back in a description; extras go to section breaks, leftovers into one `div.fewpe-img-grid`; image count/order/src/attributes unchanged). `spread.py` is the user's version plus one patch — `blocks()` splits a `<p>`/`<div>` holding several images into one block per image so `<p><img><img></p>` is detected and verified — and a `--handle` option for a one-product manual test. First store-wide sweep the same day: 3,171 active, 9 changed, 0 grids, verify mismatch 0 / adjacent 0 / style missing 0. README step 7 (`spread.py final`) and verify.py check 18 are NOT wired yet — deferred by the user.
+
 
 ```
 2b2e61f0161a9ec67baba8955829f626548cddeec3aac527ad6f9bc8e5490e94  ./DESC-SPEC.md
@@ -1188,4 +1190,6 @@ ecf9731e745ef965f65733a7c7cf530046dc25bea32681c40c6bc05a87e67ea2  ./rules/kw-ord
 b3b64dd58e7faff215653dd17d1d7cd74d1ccd9e4ae76c2580c273a5273fbb51  ./fix_sections.py
 3b8daef9a896547894840edc1503d009e2f553fc9eebae2140f14ee1d01003f9  ./spec_parse.py
 04e63e8a9ca67940181e0d2d5dd5440cf78f2e29cea5fdd6aa2e68a10c2f9591  ./build_payloads.py
+e1a23bcabc124e327d07c0d3d6441e416c0dbdba53cf08d2b93600e36a6a4957  ./spread.py
+55e1c514315857a0b72eed43a09e2b42233996e2d2aeb4892cb3d439f4e066bf  ./rules/description-image-layout-rule.md
 ```
